@@ -33,7 +33,7 @@ func main() {
         log.Fatal(err)
     }
 
-    fmt.Print("Conectado ao Banco")
+    fmt.Print("Conectado ao Banco\n\n")
 
     colecao := client.Database("Nicolas").Collection("news")
 
@@ -50,7 +50,7 @@ func main() {
     }
     doc.Find(".feed-post-body").Each(func(index int, item *goquery.Selection) {
         var article Artigo
-        article.Titulo = item.Find(".feed-post-header-chapeu").Text()
+        article.Titulo = item.Find(".feed-post-header-chapeu").First().Text()
         article.Noticia = item.Find("p").First().Text()
         article.Data = item.Find(".feed-post-datetime").First().Text()
         article.Categoria = item.Find(".feed-post-metadata-section").Text()
@@ -60,4 +60,10 @@ func main() {
             log.Fatal(err)
         }
     })
+
+    err = client.Disconnect(context.TODO())
+    if err != nil {
+        log.Fatal(err)
+    }
+    fmt.Println("Desconectado do MongoDB!")
 }
