@@ -15,7 +15,6 @@ import (
 )
 
 type Artigo struct {
-	Titulo    string `bson:"title"`
 	Noticia   string `bson:"news"`
 	Data      string `bson:"date"`
 	Categoria string `bson:"categoria"`
@@ -51,7 +50,6 @@ func main() {
 	}
 	doc.Find(".feed-post-body").Each(func(index int, item *goquery.Selection) {
 		var article Artigo
-		article.Titulo = item.Find(".feed-post-header-chapeu").First().Text()
 		article.Noticia = item.Find("p").First().Text()
 		article.Data = item.Find(".feed-post-datetime").First().Text()
 		article.Categoria = item.Find(".feed-post-metadata-section").Text()
