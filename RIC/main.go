@@ -38,7 +38,7 @@ func main() {
 	colecao := client.Database("Nicolas").Collection("news")
 	development := true
 
-	url := "https://g1.globo.com"
+	url := "https://ric.com.br/ultimas-noticias/"
 
 	res, err := http.Get(url)
 	if err != nil {
@@ -48,11 +48,11 @@ func main() {
 	if err != nil {
 		fmt.Print(err)
 	}
-	doc.Find(".feed-post-body").Each(func(index int, item *goquery.Selection) {
+	doc.Find(".post-item").Each(func(index int, item *goquery.Selection) {
 		var article Artigo
-		article.Noticia = item.Find("p").First().Text()
-		article.Data = item.Find(".feed-post-datetime").First().Text()
-		article.Categoria = item.Find(".feed-post-metadata-section").Text()
+		article.Noticia = item.Find(".post-title").First().Text()
+		article.Data = item.Find(".post-date").First().Text()
+		article.Categoria = item.Find(".post-category").Text()
 
 		if development != true {
 			_, err := colecao.InsertOne(context.TODO(), article)

@@ -38,7 +38,7 @@ func main() {
 	colecao := client.Database("Nicolas").Collection("news")
 	development := true
 
-	url := "https://g1.globo.com"
+	url := "https://g1.globo.com/ultimas-noticias/"
 
 	res, err := http.Get(url)
 	if err != nil {
