@@ -17,7 +17,7 @@ import (
 type Artigo struct {
 	Noticia   string `bson:"news"`
 	Data      string `bson:"date"`
-	Categoria string `bson:"categoria"`
+	Categoria string `bson:"category"`
 }
 
 func main() {
